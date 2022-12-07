@@ -4,10 +4,14 @@ import { AiOutlineEye } from 'react-icons/ai';
 
 const Login = (props) => {
     // data state
-    
+
     // State untuk menampung data yang dimasukkan melalui element input
-    const [inputEmail, setInputEmail]=React.useState('');
-    const [inputPass, setInputPass]=React.useState('');
+    const [inputEmail, setInputEmail] = React.useState('');
+    const [inputPass, setInputPass] = React.useState('');
+
+    const onBtnLogin = () => {
+        alert(`${inputEmail} ${inputPass}`)
+    }
 
     return <div id='loginpage'>
         <div className='container py-3 py-md-5'>
@@ -19,19 +23,21 @@ const Login = (props) => {
                 </div>
                 <div className='mt-5 mb-3'>
                     <label className='form-label fw-bold text-muted'>Email</label>
-                    <input type='email' className='form-control p-3' />
+                    <input type='email' className='form-control p-3' onChange={(element) => setInputEmail(element.target.value)} />
                 </div>
                 <div className='mb-3'>
                     <label className='form-label fw-bold text-muted'>Password</label>
                     <div className='input-group border rounded'>
-                        <input type='password' className='form-control p-3 border-0' />
+                        <input type='password' className='form-control p-3 border-0' onChange={(element) => setInputPass(element.target.value)} />
                         <span className='input-group-text bg-transparent border-0'>
                             <AiOutlineEye />
                         </span>
                     </div>
                 </div>
                 <p className='text-muted my-3' style={{ textAlign: 'right' }}>Forgot password ?<span className='main-color'>Click here</span></p>
-                <Button type='button' colorScheme='teal' variant='solid'>Login</Button>
+                <Button type='button' colorScheme='teal' variant='solid'
+                    onClick={onBtnLogin}
+                >Login</Button>
             </div>
         </div>
     </div>;
