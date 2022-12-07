@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import Axios from 'axios';
 import { Button, Text } from '@chakra-ui/react';
-
+const API_URL = 'http://localhost:2500';
 const Register = (props) => {
 
     const [username, setUsername] = React.useState('');
@@ -12,7 +12,16 @@ const Register = (props) => {
     const [visible, setVisible] = React.useState('password');
 
     const onRegis = () => {
-        alert(`${username} ${email} ${password}`)
+        Axios.post(API_URL + `/user`, {
+            username,
+            email,
+            password,
+            role: 'user'
+        }).then((response)=>{
+            alert('Register Success ✅')
+        }).catch((error)=>{
+            console.log(error);
+        })
     }
 
     const onVisibility = () => {
@@ -63,7 +72,9 @@ const Register = (props) => {
                     <Button type='button'
                         width='full'
                         colorScheme='teal'
-                        variant='solid'>
+                        variant='solid'
+                        onClick={onRegis}
+                    >
                         Create an account
                     </Button>
                     <div className='text-center text-muted'>

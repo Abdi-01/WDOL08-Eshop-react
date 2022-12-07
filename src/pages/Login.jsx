@@ -17,6 +17,7 @@ const Login = (props) => {
         Axios.get(API_URL + `/user?email=${inputEmail}&password=${inputPass}`)
             .then((response) => {
                 console.log(response.data);
+                localStorage.setItem('eshop_login', JSON.stringify(response.data[0]))
             }).catch((error) => {
                 console.log(error);
             })
