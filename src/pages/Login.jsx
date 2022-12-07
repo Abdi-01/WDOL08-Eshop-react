@@ -8,9 +8,18 @@ const Login = (props) => {
     // State untuk menampung data yang dimasukkan melalui element input
     const [inputEmail, setInputEmail] = React.useState('');
     const [inputPass, setInputPass] = React.useState('');
+    const [inputType, setInputType] = React.useState('password');
 
     const onBtnLogin = () => {
         alert(`${inputEmail} ${inputPass}`)
+    }
+
+    const onBtnVisible = () => {
+        if (inputType == 'password') {
+            setInputType('text')
+        } else {
+            setInputType('password')
+        }
     }
 
     return <div id='loginpage'>
@@ -28,8 +37,8 @@ const Login = (props) => {
                 <div className='mb-3'>
                     <label className='form-label fw-bold text-muted'>Password</label>
                     <div className='input-group border rounded'>
-                        <input type='password' className='form-control p-3 border-0' onChange={(element) => setInputPass(element.target.value)} />
-                        <span className='input-group-text bg-transparent border-0'>
+                        <input type={inputType} className='form-control p-3 border-0' onChange={(element) => setInputPass(element.target.value)} />
+                        <span className='input-group-text bg-transparent border-0' onClick={onBtnVisible}>
                             <AiOutlineEye />
                         </span>
                     </div>
