@@ -13,6 +13,7 @@ const Login = (props) => {
 
     const onBtnLogin = () => {
         // alert(`${inputEmail} ${inputPass}`);
+        // Melakukan request data ke server
         Axios.get(API_URL + `/user?email=${inputEmail}&password=${inputPass}`)
             .then((response) => {
                 console.log(response.data);

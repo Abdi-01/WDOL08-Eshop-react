@@ -41,7 +41,9 @@ const Navbar = (props) => {
                         <Link to='/login'>
                             <Button type='button' colorScheme='teal' variant='solid'>Login</Button>
                         </Link>
+                        <Link to='/regis'>
                         <Button type='button' colorScheme='teal' variant='outline'>Register</Button>
+                        </Link>
                     </ButtonGroup>
                 </form>
             </div>
