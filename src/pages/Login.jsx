@@ -1,7 +1,14 @@
 import React from 'react';
 import { Text, Button } from '@chakra-ui/react';
 import { AiOutlineEye } from 'react-icons/ai';
+
 const Login = (props) => {
+    // data state
+    
+    // State untuk menampung data yang dimasukkan melalui element input
+    const [inputEmail, setInputEmail]=React.useState('');
+    const [inputPass, setInputPass]=React.useState('');
+
     return <div id='loginpage'>
         <div className='container py-3 py-md-5'>
             <div id='form-login' className='card bg-white my-5 w-50 p-5 m-auto shadow'>
