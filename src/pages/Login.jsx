@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, Button } from '@chakra-ui/react';
 import { AiOutlineEye } from 'react-icons/ai';
-
+import Axios from 'axios';
+const API_URL = 'http://localhost:2500';
 const Login = (props) => {
     // data state
 
@@ -11,7 +12,13 @@ const Login = (props) => {
     const [inputType, setInputType] = React.useState('password');
 
     const onBtnLogin = () => {
-        alert(`${inputEmail} ${inputPass}`)
+        // alert(`${inputEmail} ${inputPass}`);
+        Axios.get(API_URL + `/user?email=${inputEmail}&password=${inputPass}`)
+            .then((response) => {
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
     }
 
     const onBtnVisible = () => {
