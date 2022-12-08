@@ -1,8 +1,16 @@
 import React from 'react';
 import { Button, ButtonGroup, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = (props) => {
+
+    const { username } = useSelector((state) => {
+        return {
+            username: state.userReducer.username
+        }
+    });
+
     return <nav className="navbar navbar-expand-lg bg-light">
         <div className="container">
             <Link to='/'>
@@ -23,14 +31,19 @@ const Navbar = (props) => {
                     </li>
                 </ul>
                 <form className="d-flex" role="search">
-                    <ButtonGroup>
-                        <Link to='/login'>
-                            <Button type='button' colorScheme='teal' variant='solid'>Login</Button>
-                        </Link>
-                        <Link to='/regis'>
-                            <Button type='button' colorScheme='teal' variant='outline'>Register</Button>
-                        </Link>
-                    </ButtonGroup>
+                    {
+                        username ?
+                            <span>{username}</span>
+                            :
+                            <ButtonGroup>
+                                <Link to='/login'>
+                                    <Button type='button' colorScheme='teal' variant='solid'>Login</Button>
+                                </Link>
+                                <Link to='/regis'>
+                                    <Button type='button' colorScheme='teal' variant='outline'>Register</Button>
+                                </Link>
+                            </ButtonGroup>
+                    }
                 </form>
             </div>
         </div>
