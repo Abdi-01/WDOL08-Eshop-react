@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Custom style */
+#banner {
+  background-image: url(https://images2.alphacoders.com/190/190220.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-content-color{
+  color: #2C7A7B;
+}

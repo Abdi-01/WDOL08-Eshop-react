@@ -1,11 +1,16 @@
 import React from 'react';
 import { Text, Button } from '@chakra-ui/react';
 import { AiOutlineEye } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import { loginAction } from '../actions/userAction';
+import { useDispatch } from 'react-redux';
 const API_URL = 'http://localhost:2500';
-const Login = (props) => {
-    // data state
 
+const Login = (props) => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch(); // untuk menjalankan action redux
+    // data state
     // State untuk menampung data yang dimasukkan melalui element input
     const [inputEmail, setInputEmail] = React.useState('');
     const [inputPass, setInputPass] = React.useState('');
@@ -17,7 +22,10 @@ const Login = (props) => {
         Axios.get(API_URL + `/user?email=${inputEmail}&password=${inputPass}`)
             .then((response) => {
                 console.log(response.data);
+                delete response.data[0].password;
+                dispatch(loginAction(response.data[0])); // menjalankan fungsi action
                 localStorage.setItem('eshop_login', JSON.stringify(response.data[0]))
+                navigate('/', { replace: true });
             }).catch((error) => {
                 console.log(error);
             })
