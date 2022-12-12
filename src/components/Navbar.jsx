@@ -9,11 +9,12 @@ import {
     Badge, Button, ButtonGroup
 } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineLogout } from 'react-icons/ai';
-
+import { logoutAction } from '../actions/userAction';
 const Navbar = (props) => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { username, role } = useSelector((state) => {
@@ -70,7 +71,7 @@ const Navbar = (props) => {
 
                                         }
                                         <MenuDivider />
-                                        <MenuItem>Signout<AiOutlineLogout className='ms-2' /></MenuItem>
+                                        <MenuItem onClick={() => dispatch(logoutAction())}>Logout<AiOutlineLogout className='ms-2' /></MenuItem>
                                     </MenuList>
                                 </Menu>
                                 :

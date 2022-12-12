@@ -6,3 +6,10 @@ export const loginAction = (data) => {
         payload: data
     }
 }
+
+export const logoutAction = () => {
+    localStorage.removeItem('eshop_login')
+    return {
+        type: "LOGOUT"
+    }
+}
