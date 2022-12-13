@@ -3,7 +3,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import Axios from 'axios';
 import { Button, Text } from '@chakra-ui/react';
-const API_URL = 'http://localhost:2500';
+import { API_URL } from '../helper';
+
 const Register = (props) => {
 
     const [username, setUsername] = React.useState('');

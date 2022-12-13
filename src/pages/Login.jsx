@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import { loginAction } from '../actions/userAction';
 import { useDispatch } from 'react-redux';
-const API_URL = 'http://localhost:2500';
+import { API_URL } from '../helper';
 
 const Login = (props) => {
     const navigate = useNavigate();

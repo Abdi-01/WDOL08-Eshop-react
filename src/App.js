@@ -12,7 +12,8 @@ import { loginAction } from './actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import Axios from 'axios';
 import Products from './pages/Products';
-const API_URL = 'http://localhost:2500';
+import { API_URL } from './helper';
+
 function App() {
 
   const [loading, setLoading] = React.useState(true);
