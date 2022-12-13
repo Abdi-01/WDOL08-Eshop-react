@@ -6,17 +6,27 @@ import {
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../helper';
+import { getProductsAction } from '../actions/productAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Products = (props) => {
     const toast = useToast();
     const navigate = useNavigate();
     const [data, setData] = React.useState([]);
-    
+
+    const dispatch = useDispatch();
+    const { products } = useSelector(({ productReducer }) => {
+        return {
+            products: productReducer.products
+        }
+    })
+
     const getData = () => {
         Axios.get(API_URL + "/products")
             .then((res) => {
                 console.log(res.data);
-                setData(res.data);
+                // setData(res.data);
+                dispatch(getProductsAction(res.data));
             }).catch((err) => {
                 console.log(err)
             })
@@ -27,7 +37,7 @@ const Products = (props) => {
     }, []);
 
     const printData = () => {
-        return data.map((val, idx) => {
+        return products.map((val, idx) => {
             return <div className='col-12 col-sm-6 col-lg-4 ' key={val.idproduct}>
                 <div className='card border-0 shadow rounded-3 btn p-0'>
                     <Image src={val.images} boxSize='100%' objectFit='cover' alt={val.name} />
@@ -39,7 +49,7 @@ const Products = (props) => {
             </div>
         })
     }
-    
+
     return <div className='container main-page'>
         <div>
             <Text fontSize="4xl" className='fw-bold text-muted'>Our Arrival products</Text>
