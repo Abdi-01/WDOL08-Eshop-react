@@ -39,7 +39,9 @@ const Products = (props) => {
 
     const printData = () => {
         return products.map((val, idx) => {
-            return <div className='col-12 col-sm-6 col-lg-4 ' key={val.idproduct}>
+            return <div className='col-12 col-sm-6 col-lg-4 '
+                onClick={() => navigate(`/detail?id=${val.id}`)}
+                key={val.id}>
                 <div className='card border-0 shadow rounded-3 btn p-0'>
                     <Image src={val.images} boxSize='100%' objectFit='cover' alt={val.name} />
                 </div>

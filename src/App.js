@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Axios from 'axios';
 import Products from './pages/Products';
 import { API_URL } from './helper';
+import Detail from './pages/Detail';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/regis' element={<Register />} />
         <Route path='/products' element={<Products />} />
+        <Route path='/detail' element={<Detail />} />
       </Routes>
       <Footer />
     </div>
