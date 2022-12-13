@@ -33,7 +33,8 @@ const Products = (props) => {
     }
 
     React.useEffect(() => {
-        getData();
+        // getData();
+        dispatch(getProductsAction());
     }, []);
 
     const printData = () => {
