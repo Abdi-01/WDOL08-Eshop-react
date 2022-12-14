@@ -12,7 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const Products = (props) => {
     const toast = useToast();
     const navigate = useNavigate();
-    const [data, setData] = React.useState([]);
+    const [dataFilter, setDataFilter] = React.useState(null);
+    const [filterName, setFilterName] = React.useState('');
 
     const dispatch = useDispatch();
     const { products } = useSelector(({ productReducer }) => {
@@ -21,15 +22,19 @@ const Products = (props) => {
         }
     })
 
-    const getData = () => {
-        Axios.get(API_URL + "/products")
-            .then((res) => {
-                console.log(res.data);
-                // setData(res.data);
-                dispatch(getProductsAction(res.data));
-            }).catch((err) => {
-                console.log(err)
-            })
+    const getFilter = async () => {
+        try {
+            let res = await Axios.get(API_URL + `/products?name=${filterName}`);
+            setDataFilter(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const onBtnReset = () => {
+        setDataFilter(null);
+        setFilterName('');
+        dispatch(getProductsAction());
     }
 
     React.useEffect(() => {
@@ -38,7 +43,8 @@ const Products = (props) => {
     }, []);
 
     const printData = () => {
-        return products.map((val, idx) => {
+        let data = dataFilter == null ? products : dataFilter;
+        return data.map((val, idx) => {
             return <div className='col-12 col-sm-6 col-lg-4 '
                 onClick={() => navigate(`/detail?id=${val.id}`)}
                 key={val.id}>
@@ -67,7 +73,10 @@ const Products = (props) => {
                         <Text fontSize="xl" className='fw-bold text-white mb-2'>Filter</Text>
                         <div className='row'>
                             <div className='col-12  my-2 '>
-                                <input className='form-control' type='text' placeholder='Name' />
+                                <input className='form-control'
+                                    value={filterName}
+                                    onChange={(element) => setFilterName(element.target.value)}
+                                    type='text' placeholder='Name' />
                             </div>
                             <div className='col-12 my-2'>
                                 <select className='form-select'>
@@ -92,10 +101,10 @@ const Products = (props) => {
                                 </div>
                             </div>
                             <div className='col-12 my-2 d-flex justify-content-evenly'>
-                                <Button colorScheme='teal'>
+                                <Button colorScheme='teal' type='button' onClick={getFilter}>
                                     Filter
                                 </Button>
-                                <Button colorScheme='yellow'>
+                                <Button colorScheme='yellow' type='button' onClick={onBtnReset}>
                                     Reset
                                 </Button>
                             </div>

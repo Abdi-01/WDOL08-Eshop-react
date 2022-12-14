@@ -11,7 +11,7 @@ const DetailPage = (props) => {
     const [detail, setDetail] = React.useState(null);
     const [qty, setQty] = React.useState(1);
 
-    console.log("CEK URL == >",useLocation());
+    console.log("CEK URL == >", useLocation());
     const { search } = useLocation();
     const getDetail = () => {
         Axios.get(API_URL + `/products${search}`)
@@ -25,7 +25,7 @@ const DetailPage = (props) => {
 
     React.useEffect(() => {
         getDetail()
-    }, []);
+    },[]);
 
     const onInc = () => {
         if (qty < detail?.stock) {
